@@ -9,20 +9,20 @@ smsController.receiveSMS = async (req, res) => {
         try {
             const existingEntry = await Blacklist.findOne({ phoneNumber: From });
             if (existingEntry) {
-                console.log(`Numéro déjà dans la blacklist: ${From}`);
-                return res.status(400).json({ message: 'Le numéro est déjà dans la blacklist' });
+                console.log(`This number is already in the blacklist: ${From}`);
+                return res.status(400).json({ message: 'This number is already in the blacklist' });
             }
 
             await Blacklist.create({ phoneNumber: From });
-            console.log(`Numéro ajouté à la blacklist: ${From}`);
-            return res.status(200).json({ message: 'Numéro ajouté à la blacklist' });
+            console.log(`Number added in the blacklist: ${From}`);
+            return res.status(200).json({ message: 'Number added in the blacklist' });
         } catch (err) {
-            console.error('Erreur lors de l\'ajout à la blacklist :', err);
-            return res.status(500).json({ message: 'Erreur lors de l\'ajout à la blacklist' });
+            console.error('Error while adding in the blacklist:', err);
+            return res.status(500).json({ message: 'Error while adding in the blacklist' });
         }
     }
 
-    console.log(`Message reçu de ${From} sans le mot 'STOP'`);
+    console.log(`Message receive from ${From} without the word 'STOP'`);
     return res.status(200).json({ message: 'OK' });
 };
 
@@ -31,8 +31,8 @@ smsController.getBlacklistedNumbers = async (req, res) => {
         const numbers = await Blacklist.find({});
         res.status(200).json(numbers);
     } catch (err) {
-        console.error('Erreur lors de la récupération des numéros blacklistés: ', err);
-        res.status(500).json({ message: 'Erreur lors de la récupération des numéros blacklistés' });
+        console.error('Error retrieving blacklist number: ', err);
+        res.status(500).json({ message: 'Error retrieving blacklist number' });
     }
 };
 
@@ -43,8 +43,8 @@ smsController.checkBlacklistedNumber = async (req, res) => {
         const blacklisted = await Blacklist.findOne({ phoneNumber });
         res.status(200).json({ blacklisted: !!blacklisted });
     } catch (err) {
-        console.error('Erreur lors de la vérification du numéro blacklisté :', err);
-        res.status(500).json({ message: 'Erreur lors de la vérification du numéro blacklisté' });
+        console.error('Blacklist number verification error :', err);
+        res.status(500).json({ message: 'Blacklist number verification error' });
     }
 };
 

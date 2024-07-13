@@ -39,7 +39,7 @@ body example:
 response:
 ```
 {
-    "message": "Numéro ajouté à la blacklist"
+    "message": "Number added in the blacklist"
 }
 ```
 
@@ -52,7 +52,7 @@ Check if a number is blacklisted
 body example:
 ```
 {
-    "phoneNumber": "+336111"
+    "phoneNumber": "+33753183607"
 }
 ```
 response:
